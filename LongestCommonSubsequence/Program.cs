@@ -24,10 +24,23 @@ namespace LongestCommonSubsequence
         //The longest common subsequence.Ensure that there are no trailing empty spaces on each line you print. E.g.
 
         //MJAU//
+        static string[] Sequences = new string[2];
         static void Main(string[] args)
         {
+            Sequences = getSequences();
+            Console.WriteLine("{0};{1}", Sequences[0], Sequences[1]);
+
+            Console.ReadKey();
+
+        }
+
+        private static string[] getSequences()
+        {
+            // Declared variables
             bool checkFirst = false, checkSecond = false;
             string firstSequence = null, secondSequence = null;
+
+            //Loop to collect and check if sequence length. Keeps running till sequnce is under 50 characters
             do
             {
                 if (!checkFirst)
@@ -35,6 +48,7 @@ namespace LongestCommonSubsequence
                     Console.WriteLine("Input your first sequence");
                     firstSequence = Console.ReadLine();
                     checkFirst = CheckStringLength(firstSequence);
+                    Sequences[0] = firstSequence;
                 }
 
                 if (!checkSecond)
@@ -42,37 +56,32 @@ namespace LongestCommonSubsequence
                     Console.WriteLine("Input your second sequence");
                     secondSequence = Console.ReadLine();
                     checkSecond = CheckStringLength(secondSequence);
+                    Sequences[1] = secondSequence;
                 }
-                
+
             } while (!checkFirst && !checkSecond);
 
-
-            Console.WriteLine("{0};{1}",firstSequence , secondSequence);
-
-            Console.ReadKey();
-
+            return Sequences;
         }
 
+        // Method to check string length
         private static bool CheckStringLength(string Sequence)
         {
             bool underMax = false;
-            try
-            {
-                if (Sequence.Length > 50)
-                {
-                    throw new Exception();
-                }
-                else
-                {
-                    return underMax = true;
-                }
-            }
-            catch(Exception)
+
+            // If sequnce of string is over 50 this runs
+            if (Sequence.Length > 10)
             {
                 Console.WriteLine("Sequnce can't be longer than 50 characters");
-                return underMax; 
+                return underMax;
             }
-            
+            // If less than 50 this runs
+            else
+            {
+                return underMax = true;
+            }
         }
+
     }
 }
+
