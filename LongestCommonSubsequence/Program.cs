@@ -50,7 +50,10 @@ namespace LongestCommonSubsequence
                     checkFirst = CheckStringLength(firstSequence);
                     Sequences[0] = firstSequence;
                 }
-
+            } while (!checkFirst);
+            
+            do
+            {
                 if (!checkSecond)
                 {
                     Console.WriteLine("Input your second sequence");
@@ -58,8 +61,8 @@ namespace LongestCommonSubsequence
                     checkSecond = CheckStringLength(secondSequence);
                     Sequences[1] = secondSequence;
                 }
+            } while (!checkSecond);
 
-            } while (!checkFirst && !checkSecond);
 
             return Sequences;
         }
