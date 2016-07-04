@@ -22,16 +22,32 @@ namespace LongestCommonSubsequence
 
         //OUTPUT SAMPLE:
         //The longest common subsequence.Ensure that there are no trailing empty spaces on each line you print. E.g.
-
+            
         //MJAU//
         static string[] Sequences = new string[2];
         static void Main(string[] args)
         {
             Sequences = getSequences();
+
             Console.WriteLine("{0};{1}", Sequences[0], Sequences[1]);
 
+            LCS(Sequences);
             Console.ReadKey();
 
+        }
+        // method to get Longest Common Subsequence
+        private static void LCS(string[] sequences)
+        {
+            char[] firstString = new char[sequences[0].Length];
+            char[] secondString = new char[sequences[1].Length];
+
+            firstString = sequences[0].ToArray();
+            secondString = Sequences[1].ToArray();
+
+            foreach(char c in firstString)
+            {
+                Console.WriteLine(c);
+            }
         }
 
         private static string[] getSequences()
@@ -51,7 +67,7 @@ namespace LongestCommonSubsequence
                     Sequences[0] = firstSequence;
                 }
             } while (!checkFirst);
-            
+
             do
             {
                 if (!checkSecond)
@@ -73,7 +89,7 @@ namespace LongestCommonSubsequence
             bool underMax = false;
 
             // If sequnce of string is over 50 this runs
-            if (Sequence.Length > 10)
+            if (Sequence.Length > 50)
             {
                 Console.WriteLine("Sequnce can't be longer than 50 characters");
                 return underMax;
