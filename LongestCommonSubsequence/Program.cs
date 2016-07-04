@@ -24,6 +24,7 @@ namespace LongestCommonSubsequence
         //The longest common subsequence.Ensure that there are no trailing empty spaces on each line you print. E.g.
             
         //MJAU//
+
         static string[] Sequences = new string[2];
         static void Main(string[] args)
         {
@@ -33,8 +34,8 @@ namespace LongestCommonSubsequence
 
             LCS(Sequences);
             Console.ReadKey();
-
         }
+
         // method to get Longest Common Subsequence
         private static void LCS(string[] sequences)
         {
@@ -44,9 +45,40 @@ namespace LongestCommonSubsequence
             firstString = sequences[0].ToArray();
             secondString = Sequences[1].ToArray();
 
-            foreach(char c in firstString)
+            int[,] numArray = new int[firstString.Length + 1, secondString.Length + 1];
+
+            for (int i = 0; i < firstString.Length + 1; i++)
             {
-                Console.WriteLine(c);
+                numArray[i,0] = 0;
+                numArray[0,i] = 0;
+            }
+
+            for (int i = 1; i < firstString.Length + 1; i++)
+            {
+                for (int j = 1; j < secondString.Length + 1; j++)
+                {
+                    if (firstString[i-1] == secondString[j-1])
+                    {
+                        numArray[i,j] = numArray[i - 1, j - 1] + 1;
+                    }
+                    else
+                    {
+                        numArray[i, j] = Math.Max(numArray[i-1,j],numArray[i,j-1]);
+                    }
+                }
+            }
+            //foreach(char c in firstString)
+            //{
+            //    Console.WriteLine(c);
+            //}
+
+            for (int i = 0; i < firstString.Length + 1; i++)
+            {
+                for (int j = 0; j < secondString.Length + 1; j++)
+                {
+                    Console.Write(numArray[i,j]);
+                }
+                Console.WriteLine();
             }
         }
 
