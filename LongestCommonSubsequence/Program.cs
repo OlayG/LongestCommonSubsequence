@@ -45,24 +45,30 @@ namespace LongestCommonSubsequence
             firstString = sequences[0].ToArray();
             secondString = Sequences[1].ToArray();
 
+            // Creates a matrix with the using the length of strings as the dimension
+            // added one to length since the array must have 1 extra colum and row
             int[,] numArray = new int[firstString.Length + 1, secondString.Length + 1];
 
-            for (int i = 0; i < firstString.Length + 1; i++)
-            {
-                numArray[i,0] = 0;
-                numArray[0,i] = 0;
-            }
-
+            
+            // Fills matrix to calculate LCS
+            // First string is used as row
             for (int i = 1; i < firstString.Length + 1; i++)
             {
+                // Second string is used at column
                 for (int j = 1; j < secondString.Length + 1; j++)
                 {
+                    // If char in both strings are equal this runs
                     if (firstString[i-1] == secondString[j-1])
                     {
+                        // Goes to spot in array using the firstString as row and secondString and col
+                        // gets the value NW positon to it and adds 1
+                        // then assigned value to the spot
                         numArray[i,j] = numArray[i - 1, j - 1] + 1;
                     }
                     else
                     {
+                        // If they are not equal, takes value north and west
+                        // and assigned the bigger value to the spot
                         numArray[i, j] = Math.Max(numArray[i-1,j],numArray[i,j-1]);
                     }
                 }
