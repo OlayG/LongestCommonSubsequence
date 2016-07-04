@@ -30,7 +30,7 @@ namespace LongestCommonSubsequence
         {
             Sequences = getSequences();
 
-            Console.WriteLine("{0};{1}", Sequences[0], Sequences[1]);
+            Console.WriteLine("{0};{1}\n", Sequences[0], Sequences[1]);
 
             LCS(Sequences);
             Console.ReadKey();
@@ -67,21 +67,65 @@ namespace LongestCommonSubsequence
                     }
                 }
             }
-            //foreach(char c in firstString)
-            //{
-            //    Console.WriteLine(c);
-            //}
 
+            // Prints out matrix solution
             for (int i = 0; i < firstString.Length + 1; i++)
             {
                 for (int j = 0; j < secondString.Length + 1; j++)
                 {
-                    Console.Write(numArray[i,j]);
+                    Console.Write("{0} ",numArray[i,j]);
                 }
                 Console.WriteLine();
             }
+
+            int lcsLength = 0;
+            // Gets the length of the longest common subsequence
+            for (int i = firstString.Length; i >= 0; i--)
+            {
+                for (int j = secondString.Length; j >= 0; j--)
+                {
+                    if (firstString[i-1] == secondString[j-1])
+                    {
+                        lcsLength = numArray[i, j];
+                        Console.WriteLine("\nThe LCS is {0}\n", numArray[i, j]);
+                        break;
+                    }
+                }
+                break;
+            }
+
+            
+            char[] lcmString = new char[lcsLength];
+            int m = 0;
+            // Adds each LCS char into array
+            for (int i = firstString.Length; i > 0; i--)
+            {
+                for (int j = secondString.Length; j > 0; j--)
+                {
+                    if (firstString[i - 1] == secondString[j - 1] && numArray[i,j] == lcsLength)
+                    {
+                        lcsLength--;
+                        lcmString[m] = firstString[i - 1];
+                        m++;
+                    }
+                }
+            }
+
+            // Prints each char in the Longest Common Subsequence
+            printLCS(lcmString);
         }
 
+        // Method to print LCS 
+        private static void printLCS(char[] lcmString)
+        {
+            Console.Write("The LCS string is: ");
+           for (int i = lcmString.Length-1; i >= 0; i--)
+            {
+                Console.Write(lcmString[i]);
+            }
+        }
+
+        // Collects user input
         private static string[] getSequences()
         {
             // Declared variables
